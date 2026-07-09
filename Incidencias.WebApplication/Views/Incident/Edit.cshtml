@@ -1,0 +1,103 @@
+﻿@model Incidencias.WebApplication.Models.Incidents.IncidentEditViewModel
+
+
+<h2>Editar incidencia</h2>
+
+
+<form asp-action="Edit">
+
+
+    <input asp-for="Id"
+           type="hidden" />
+
+
+
+    <div class="mb-3">
+
+        <label asp-for="Title"></label>
+
+        <input asp-for="Title"
+               class="form-control" />
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+        <label asp-for="Description"></label>
+
+<textarea asp-for="Description"
+          class="form-control"></textarea>
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+        <label>Categoría</label>
+
+        <select asp-for="CategoryId"
+                asp-items="Model.Categories"
+                class="form-select">
+        </select>
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+        <label>Responsable</label>
+
+        <select asp-for="ResponsibleId"
+                asp-items="Model.Responsibles"
+                class="form-select">
+        </select>
+
+    </div>
+
+
+
+    <div class="mb-3">
+
+        <label>Prioridad</label>
+
+        <select asp-for="Priority"
+                class="form-select">
+
+            <option value="1">
+                Baja
+            </option>
+
+            <option value="2">
+                Media
+            </option>
+
+            <option value="3">
+                Alta
+            </option>
+
+            <option value="4">
+                Critica
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <button class="btn btn-success">
+        Guardar
+    </button>
+
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+
+
+</form>

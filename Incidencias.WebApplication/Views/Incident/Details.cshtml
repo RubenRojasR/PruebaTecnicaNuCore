@@ -1,0 +1,146 @@
+﻿@model Incidencias.WebApplication.Models.Incidents.IncidentDetailViewModel
+
+
+
+<h2>Detalle de incidencia</h2>
+
+
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+
+        <h5>
+            @Model.Incident.Code
+        </h5>
+
+
+        <p>
+            <strong>Título:</strong>
+            @Model.Incident.Title
+        </p>
+
+
+        <p>
+            <strong>Descripción:</strong>
+            @Model.Incident.Description
+        </p>
+
+
+        <p>
+            <strong>Categoría:</strong>
+            @Model.Incident.Category.Name
+        </p>
+
+
+        <p>
+            <strong>Responsable:</strong>
+            @Model.Incident.Responsible.Name
+        </p>
+
+
+        <p>
+            <strong>Prioridad:</strong>
+            @Model.Incident.Priority
+        </p>
+
+
+        <p>
+            <strong>Estado:</strong>
+            @Model.Incident.Status
+        </p>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<h3>
+    Historial de cambios
+</h3>
+
+
+
+<table class="table table-bordered">
+
+
+    <thead>
+
+        <tr>
+
+            <th>
+                Fecha
+            </th>
+
+
+            <th>
+                Estado anterior
+            </th>
+
+
+            <th>
+                Estado nuevo
+            </th>
+
+
+            <th>
+                Comentario
+            </th>
+
+
+        </tr>
+
+    </thead>
+
+
+
+    <tbody>
+
+
+        @foreach (var item in Model.History)
+        {
+
+            <tr>
+
+                <td>
+                    @item.UpdatedDate.ToString("dd/MM/yyyy HH:mm")
+                </td>
+
+
+                <td>
+                    @item.PreviousStatus
+                </td>
+
+
+                <td>
+                    @item.CurrentStatus
+                </td>
+
+
+                <td>
+                    @item.Comment
+                </td>
+
+
+            </tr>
+
+
+        }
+
+
+    </tbody>
+
+
+</table>
+
+
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Regresar
+</a>

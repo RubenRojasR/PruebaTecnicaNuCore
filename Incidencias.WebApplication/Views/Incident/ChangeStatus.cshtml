@@ -1,0 +1,136 @@
+﻿@model Incidencias.WebApplication.Models.Incidents.ChangeStatusViewModel
+
+
+<h2>Cambiar estado</h2>
+
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h5>
+            @Model.Code
+        </h5>
+
+        <p>
+            @Model.Title
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<form asp-action="ChangeStatus">
+
+
+    <input asp-for="Id"
+           type="hidden" />
+
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+
+
+    <div class="mb-3">
+
+        <label>
+            Nuevo estado
+        </label>
+
+
+        <select asp-for="NewStatus"
+                asp-items="Model.Status"
+                id="status"
+                class="form-select">
+
+            <option value="">
+                Seleccione
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+
+    <div class="mb-3"
+         id="commentContainer">
+
+
+        <label>
+            Comentario
+        </label>
+
+
+<textarea asp-for="Comment"
+          class="form-control"
+          rows="4"></textarea>
+
+
+        <span asp-validation-for="Comment"
+              class="text-danger"></span>
+
+
+    </div>
+
+
+
+    <button class="btn btn-success">
+        Guardar
+    </button>
+
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+
+
+</form>
+
+
+
+@section Scripts
+{
+
+    <script>
+
+        const status =
+        document.getElementById("status");
+
+
+        const comment =
+        document.getElementById("commentContainer");
+
+
+
+        function validateComment()
+        {
+            if(status.value == "3")
+            {
+                comment.style.display = "block";
+            }
+            else
+            {
+                comment.style.display = "none";
+            }
+        }
+
+
+
+        status.addEventListener(
+        "change",
+        validateComment);
+
+
+        validateComment();
+
+
+    </script>
+
+
+}

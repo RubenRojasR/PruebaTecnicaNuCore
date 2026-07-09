@@ -1,0 +1,227 @@
+﻿@model Incidencias.WebApplication.Models.Incidents.IncidentFilterViewModel
+
+
+<h2>Incidencias</h2>
+
+
+<a asp-action="Create"
+   class="btn btn-primary mb-3">
+    Nueva incidencia
+</a>
+
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+
+<form method="get" asp-action="Index">
+
+    <div class="row mb-3">
+
+
+        <div class="col-md-3">
+
+            <label>
+                Estado
+            </label>
+
+
+            <select name="status"
+                    class="form-select">
+
+
+                <option value="">
+                    Todos
+                </option>
+
+
+                <option value="1"
+                        selected="@(Model.Status == 1)">
+                    Nueva
+                </option>
+
+
+                <option value="2"
+                        selected="@(Model.Status == 2)">
+                    En progreso
+                </option>
+
+
+                <option value="3"
+                        selected="@(Model.Status == 3)">
+                    Resuelta
+                </option>
+
+
+                <option value="4"
+                        selected="@(Model.Status == 4)">
+                    Cancelada
+                </option>
+
+
+            </select>
+
+        </div>
+
+
+
+
+        <div class="col-md-3">
+
+            <label>
+                Prioridad
+            </label>
+
+
+            <select name="priority"
+                    class="form-select">
+
+
+                <option value="">
+                    Todas
+                </option>
+
+
+                <option value="1"
+                        selected="@(Model.Priority == 1)>
+                    Baja
+                </option>
+
+
+                <option value="2"
+                        selected="@(Model.Priority == 2)">
+                    Media
+                </option>
+
+
+                <option value="3" selected="@(Model.Priority == 3)">
+                    Alta
+                </option>
+
+
+                <option value="4" selected="@(Model.Priority == 4)">
+                    Critica
+                </option>
+
+
+            </select>
+
+        </div>
+
+
+
+        <div class="col-md-2 align-self-end">
+
+            <button class="btn btn-primary">
+                Filtrar
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</form>
+
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+
+            <th>Folio</th>
+
+            <th>Título</th>
+
+            <th>Categoría</th>
+
+            <th>Responsable</th>
+
+            <th>Prioridad</th>
+
+            <th>Estado</th>
+
+            <th></th>
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+
+        @foreach (var item in Model.Incidents)
+        {
+
+            <tr>
+
+                <td>
+                    @item.Code
+                </td>
+
+
+                <td>
+                    @item.Title
+                </td>
+
+
+                <td>
+                    @item.Category.Name
+                </td>
+
+
+                <td>
+                    @item.Responsible.Name
+                </td>
+
+
+                <td>
+                    @item.Priority
+                </td>
+
+
+                <td>
+                    @item.Status
+                </td>
+
+
+                <td>
+                    @if(item.Status != Incidencias.Domain.Enums.IncidentStatus.Cancelado)
+                    {
+                        <a asp-action="Edit"
+                       asp-route-id="@item.Id"
+                       class="btn btn-warning btn-sm">
+                        Editar
+                        </a>
+
+
+                    <a asp-action="ChangeStatus"
+                       asp-route-id="@item.Id"
+                       class="btn btn-info btn-sm">
+                        Estado
+                    </a>
+                    }
+                    
+
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.Id"
+                       class="btn btn-secondary btn-sm">
+                        Historial
+                    </a>
+
+
+                </td>
+
+
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
